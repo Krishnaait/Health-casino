@@ -26,14 +26,14 @@ const BET_AMOUNTS = [5000, 10000, 25000, 50000];
 const BOARD_CONFIGS = [
   { pins: 8, label: '8 Pins', multipliers: [0.5, 1, 2, 5, 10, 5, 2, 1, 0.5] },
   { pins: 12, label: '12 Pins', multipliers: [0.5, 1, 1.5, 2, 3, 5, 10, 5, 3, 2, 1.5, 1, 0.5] },
-  { pins: 16, label: '16 Pins', multipliers: [0.2, 0.5, 1, 1.5, 2, 3, 5, 10, 20, 10, 5, 3, 2, 1.5, 1, 0.5, 0.2] },
+  { pins: 14, label: '14 Pins', multipliers: [0.5, 1, 1.6, 3.2, 5.6, 12, 55, 0.2, 0.7, 1, 1.6, 3.2, 5.6, 12, 55] },
 ];
 
 export default function Plinko() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [credits, setCredits] = useState(1000000);
   const [betAmount, setBetAmount] = useState(10000);
-  const [boardConfig, setBoardConfig] = useState(BOARD_CONFIGS[1]);
+  const [boardConfig, setBoardConfig] = useState(BOARD_CONFIGS[2]);
   const [playing, setPlaying] = useState(false);
   const [message, setMessage] = useState('');
   const [lastWinnings, setLastWinnings] = useState(0);
@@ -49,10 +49,10 @@ export default function Plinko() {
   // Initialize pegs
   useEffect(() => {
     const pegs: Peg[] = [];
-    const boardWidth = 400;
-    const boardHeight = 300;
-    const pegRadius = 6;
-    const spacing = boardWidth / (boardConfig.pins + 1);
+    const boardWidth = 500;
+    const boardHeight = 350;
+    const pegRadius = 8;
+    const spacing = boardWidth / (boardConfig.pins + 2);
 
     for (let row = 0; row < boardConfig.pins; row++) {
       const pegsInRow = row + 1;
@@ -62,7 +62,7 @@ export default function Plinko() {
       for (let col = 0; col < pegsInRow; col++) {
         pegs.push({
           x: rowX + col * spacing,
-          y: 40 + row * (spacing * 0.8),
+          y: 50 + row * (spacing * 0.9),
           radius: pegRadius,
         });
       }
@@ -80,51 +80,96 @@ export default function Plinko() {
     if (!ctx) return;
 
     const draw = () => {
-      // Clear canvas
-      ctx.fillStyle = '#1a1a2e';
+      // Clear canvas with gradient background
+      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      gradient.addColorStop(0, '#1e7a8a');
+      gradient.addColorStop(0.5, '#2a9fa8');
+      gradient.addColorStop(1, '#1e7a8a');
+      ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Draw border
-      ctx.strokeStyle = '#00d4ff';
-      ctx.lineWidth = 2;
-      ctx.strokeRect(10, 10, canvas.width - 20, canvas.height - 20);
+      // Draw decorative circles in background
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+      ctx.beginPath();
+      ctx.arc(canvas.width * 0.15, canvas.height * 0.3, 80, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(canvas.width * 0.85, canvas.height * 0.4, 100, 0, Math.PI * 2);
+      ctx.fill();
 
-      // Draw pegs
-      ctx.fillStyle = '#ffd700';
+      // Draw border
+      ctx.strokeStyle = 'rgba(0, 200, 200, 0.5)';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([5, 5]);
+      ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 100);
+      ctx.setLineDash([]);
+
+      // Draw pegs - white/light colored
+      ctx.fillStyle = '#ffffff';
+      ctx.shadowColor = 'rgba(0, 200, 200, 0.5)';
+      ctx.shadowBlur = 10;
       pegsRef.current.forEach((peg) => {
         ctx.beginPath();
         ctx.arc(peg.x, peg.y, peg.radius, 0, Math.PI * 2);
         ctx.fill();
       });
+      ctx.shadowColor = 'transparent';
 
       // Draw ball
       if (ballRef.current) {
         const ball = ballRef.current;
         const gradient = ctx.createRadialGradient(
-          ball.x - 2,
-          ball.y - 2,
+          ball.x - 3,
+          ball.y - 3,
           0,
           ball.x,
           ball.y,
           ball.radius
         );
-        gradient.addColorStop(0, '#ff6b9d');
-        gradient.addColorStop(1, '#c44569');
+        gradient.addColorStop(0, '#ffffff');
+        gradient.addColorStop(0.7, '#00d4ff');
+        gradient.addColorStop(1, '#0099cc');
         ctx.fillStyle = gradient;
         ctx.beginPath();
         ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
         ctx.fill();
+        
+        // Ball shadow
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+        ctx.beginPath();
+        ctx.arc(ball.x, ball.y + ball.radius + 2, ball.radius * 0.8, 0, Math.PI * 2);
+        ctx.fill();
       }
 
-      // Draw multipliers at bottom
-      ctx.fillStyle = '#00d4ff';
-      ctx.font = 'bold 12px Arial';
+      // Draw multipliers at bottom with color coding
+      ctx.font = 'bold 14px Arial';
       ctx.textAlign = 'center';
-      const multiplierY = canvas.height - 20;
-      const multiplierSpacing = canvas.width / (boardConfig.multipliers.length + 1);
+      ctx.textBaseline = 'middle';
+      const multiplierY = canvas.height - 45;
+      const multiplierSpacing = (canvas.width - 40) / boardConfig.multipliers.length;
 
       boardConfig.multipliers.forEach((mult, idx) => {
-        const x = multiplierSpacing * (idx + 1);
+        const x = 20 + multiplierSpacing * (idx + 0.5);
+        
+        // Determine color based on multiplier value
+        let bgColor = '#2d5a2d'; // Green for low
+        if (mult >= 5 && mult < 20) {
+          bgColor = '#8b7500'; // Yellow for medium
+        } else if (mult >= 20) {
+          bgColor = '#8b0000'; // Red for high
+        }
+        
+        // Draw multiplier box
+        ctx.fillStyle = bgColor;
+        ctx.fillRect(x - multiplierSpacing * 0.4, multiplierY - 20, multiplierSpacing * 0.8, 40);
+        
+        // Draw border
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(x - multiplierSpacing * 0.4, multiplierY - 20, multiplierSpacing * 0.8, 40);
+        
+        // Draw text
+        ctx.fillStyle = '#ffffff';
         ctx.fillText(`${mult}x`, x, multiplierY);
       });
     };
@@ -140,9 +185,9 @@ export default function Plinko() {
     const canvas = canvasRef.current;
     if (!canvas) return false;
 
-    const gravity = 0.3;
-    const friction = 0.99;
-    const bounce = 0.7;
+    const gravity = 0.4;
+    const friction = 0.98;
+    const bounce = 0.6;
 
     // Apply gravity
     ball.vy += gravity;
@@ -164,23 +209,23 @@ export default function Plinko() {
         ball.x = peg.x + Math.cos(angle) * minDistance;
         ball.y = peg.y + Math.sin(angle) * minDistance;
 
-        ball.vx = Math.cos(angle) * 5 * bounce;
-        ball.vy = Math.sin(angle) * 5 * bounce;
+        ball.vx = Math.cos(angle) * 6 * bounce;
+        ball.vy = Math.sin(angle) * 6 * bounce;
       }
     });
 
     // Collision with walls
-    if (ball.x - ball.radius < 10) {
-      ball.x = 10 + ball.radius;
+    if (ball.x - ball.radius < 20) {
+      ball.x = 20 + ball.radius;
       ball.vx *= -bounce;
     }
-    if (ball.x + ball.radius > canvas.width - 10) {
-      ball.x = canvas.width - 10 - ball.radius;
+    if (ball.x + ball.radius > canvas.width - 20) {
+      ball.x = canvas.width - 20 - ball.radius;
       ball.vx *= -bounce;
     }
 
     // Check if ball reached bottom
-    if (ball.y > canvas.height - 30) {
+    if (ball.y > canvas.height - 80) {
       return true; // Ball finished
     }
 
@@ -204,9 +249,9 @@ export default function Plinko() {
     ballRef.current = {
       x: canvas.width / 2,
       y: 30,
-      vx: (Math.random() - 0.5) * 2,
+      vx: (Math.random() - 0.5) * 3,
       vy: 0,
-      radius: 5,
+      radius: 7,
     };
 
     // Animate ball
@@ -290,13 +335,13 @@ export default function Plinko() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-purple-900 to-gray-900 p-4">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-teal-900 to-gray-900 p-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-6">
           <div>
             <h1 className="text-4xl font-bold text-cyan-400">🎯 PLINKO</h1>
-            <p className="text-cyan-300 text-sm mt-1">Drop the ball and watch it bounce!</p>
+            <p className="text-cyan-300 text-sm mt-1">Pins: {boardConfig.pins}</p>
           </div>
           <div className="text-right bg-gray-800 border-2 border-cyan-600 rounded-lg p-4">
             <div className="text-cyan-300 text-sm font-semibold">YOUR CREDITS</div>
@@ -323,9 +368,9 @@ export default function Plinko() {
               {/* Canvas */}
               <canvas
                 ref={canvasRef}
-                width={450}
-                height={400}
-                className="w-full border-2 border-cyan-500 rounded-lg mb-6 bg-gray-900"
+                width={550}
+                height={450}
+                className="w-full border-2 border-cyan-500 rounded-lg mb-6 bg-gradient-to-b from-teal-700 to-teal-900"
               />
 
               {/* Game Settings */}
@@ -343,7 +388,7 @@ export default function Plinko() {
                         disabled={playing}
                         className={`py-2 px-3 rounded font-bold text-sm transition-all ${
                           boardConfig.pins === config.pins
-                            ? 'bg-purple-600 text-white ring-2 ring-purple-400'
+                            ? 'bg-cyan-600 text-white ring-2 ring-cyan-400'
                             : 'bg-gray-700 text-cyan-300 hover:bg-gray-600'
                         } disabled:opacity-50`}
                       >
@@ -473,13 +518,13 @@ export default function Plinko() {
             <div className="bg-gray-700 rounded-lg p-4 border border-gray-600">
               <h3 className="font-bold text-cyan-400 mb-3 text-lg">1️⃣ PLACE YOUR BET</h3>
               <p className="text-cyan-200 text-sm leading-relaxed">
-                Select your bet amount (5K, 10K, 25K, or 50K credits) and choose your board layout (8, 12, or 16 pins). More pins = more possible outcomes!
+                Select your bet amount (5K, 10K, 25K, or 50K credits) and choose your board layout (8, 12, or 14 pins). More pins = more possible outcomes!
               </p>
             </div>
             <div className="bg-gray-700 rounded-lg p-4 border border-gray-600">
               <h3 className="font-bold text-cyan-400 mb-3 text-lg">2️⃣ DROP THE BALL</h3>
               <p className="text-cyan-200 text-sm leading-relaxed">
-                Click DROP to release the ball from the top. Watch it bounce off the pegs as it falls down the pyramid. The path is completely random!
+                Click DROP to release the ball from the top. Watch it bounce off the white pegs as it falls down the pyramid. The path is completely random!
               </p>
             </div>
             <div className="bg-gray-700 rounded-lg p-4 border border-gray-600">
@@ -499,9 +544,9 @@ export default function Plinko() {
               <h3 className="text-cyan-300 font-bold mb-3">Basic Rules</h3>
               <ul className="space-y-2">
                 <li>✓ Each drop costs your selected bet amount</li>
-                <li>✓ Ball bounces randomly off pegs as it falls</li>
+                <li>✓ Ball bounces randomly off white pegs as it falls</li>
                 <li>✓ Landing position determines your multiplier</li>
-                <li>✓ Multipliers range from 0.2x to 20x depending on board</li>
+                <li>✓ Color-coded slots: Green (low), Yellow (medium), Red (high)</li>
                 <li>✓ Winnings = Bet Amount × Multiplier</li>
                 <li>✓ Use AUTOPLAY to drop 10 balls automatically</li>
               </ul>
@@ -511,9 +556,9 @@ export default function Plinko() {
               <ul className="space-y-2">
                 <li><span className="text-cyan-400 font-semibold">8 Pins:</span> Simple layout, lower volatility</li>
                 <li><span className="text-cyan-400 font-semibold">12 Pins:</span> Balanced gameplay, medium volatility</li>
-                <li><span className="text-cyan-400 font-semibold">16 Pins:</span> Complex layout, higher volatility</li>
+                <li><span className="text-cyan-400 font-semibold">14 Pins:</span> Professional layout, higher volatility</li>
                 <li><span className="text-cyan-400 font-semibold">RTP:</span> Typically 96% - favorable odds</li>
-                <li><span className="text-cyan-400 font-semibold">Max Win:</span> 20x your bet (on 16-pin board)</li>
+                <li><span className="text-cyan-400 font-semibold">Max Win:</span> 55x your bet (on 14-pin board)</li>
               </ul>
             </div>
           </div>
@@ -541,7 +586,7 @@ export default function Plinko() {
               <h3 className="text-cyan-300 font-bold mb-3">Game Features</h3>
               <ul className="space-y-2 mb-4">
                 <li><span className="text-cyan-400 font-semibold">Physics-Based:</span> Realistic ball bouncing and gravity</li>
-                <li><span className="text-cyan-400 font-semibold">Multiplier System:</span> 9-17 different payout slots</li>
+                <li><span className="text-cyan-400 font-semibold">Multiplier System:</span> Color-coded payout slots</li>
                 <li><span className="text-cyan-400 font-semibold">Autoplay:</span> Set 10 automatic drops</li>
                 <li><span className="text-cyan-400 font-semibold">Game History:</span> Track all recent drops</li>
                 <li><span className="text-cyan-400 font-semibold">Free-to-Play:</span> Unlimited credits, no real money</li>
