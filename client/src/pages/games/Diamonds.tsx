@@ -39,7 +39,7 @@ export default function Diamonds() {
 
   const initializeGame = () => {
     if (credits < betAmount) {
-      setMessage('Insufficient credits!');
+      setMessage('Insufficient points!');
       return;
     }
 
@@ -121,7 +121,7 @@ export default function Diamonds() {
             <p className="text-cyan-300 text-sm mt-1">Match 3+ Gems to Win Big!</p>
           </div>
           <div className="text-right bg-gray-800 border-2 border-cyan-600 rounded-lg p-4">
-            <div className="text-cyan-300 text-sm font-semibold">YOUR CREDITS</div>
+            <div className="text-cyan-300 text-sm font-semibold">YOUR POINTS</div>
             <div className="text-3xl font-bold text-cyan-400">{credits.toLocaleString()}</div>
           </div>
         </div>

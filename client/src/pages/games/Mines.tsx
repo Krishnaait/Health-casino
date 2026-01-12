@@ -33,7 +33,7 @@ export default function Mines() {
 
   const initializeGame = () => {
     if (credits < betAmount) {
-      setMessage('Insufficient credits!');
+      setMessage('Insufficient points!');
       return;
     }
 
@@ -161,7 +161,7 @@ export default function Mines() {
             <p className="text-yellow-300 text-sm mt-1">Uncover Diamonds, Avoid Mines, Win Big!</p>
           </div>
           <div className="text-right bg-gray-800 border-2 border-yellow-600 rounded-lg p-4">
-            <div className="text-yellow-300 text-sm font-semibold">YOUR CREDITS</div>
+            <div className="text-yellow-300 text-sm font-semibold">YOUR POINTS</div>
             <div className="text-3xl font-bold text-yellow-400">{credits.toLocaleString()}</div>
           </div>
         </div>
@@ -381,7 +381,7 @@ export default function Mines() {
             <div className="bg-gray-700 rounded-lg p-4 border border-gray-600">
               <h3 className="font-bold text-yellow-400 mb-3 text-lg">3️⃣ CASH OUT OR RISK</h3>
               <p className="text-yellow-200 text-sm leading-relaxed">
-                After each safe reveal, you can choose to "Cash Out" and collect your winnings (bet × current multiplier), or continue playing to increase your multiplier. The longer you play, the higher the risk but the bigger the potential payout!
+                After each safe reveal, you can choose to "Collect" and collect your winnings (bet × current multiplier), or continue playing to increase your multiplier. The longer you play, the higher the risk but the bigger the potential payout!
               </p>
             </div>
           </div>

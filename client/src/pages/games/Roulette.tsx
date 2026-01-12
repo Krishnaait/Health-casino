@@ -57,7 +57,7 @@ export default function Roulette() {
 
   const placeBet = (type: string, value: string | number) => {
     if (credits < betAmount) {
-      setMessage('Insufficient credits!');
+      setMessage('Insufficient points!');
       return;
     }
 
@@ -243,7 +243,7 @@ export default function Roulette() {
             <p className="text-yellow-300 text-sm mt-1">European Roulette - Spin the Wheel and Win Big</p>
           </div>
           <div className="text-right bg-gray-800 border-2 border-yellow-600 rounded-lg p-4">
-            <div className="text-yellow-300 text-sm font-semibold">YOUR CREDITS</div>
+            <div className="text-yellow-300 text-sm font-semibold">YOUR POINTS</div>
             <div className="text-3xl font-bold text-yellow-400">{credits.toLocaleString()}</div>
           </div>
         </div>
