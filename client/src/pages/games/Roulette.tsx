@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 
 interface BetSelection {
@@ -21,6 +21,7 @@ export default function Roulette() {
   const [message, setMessage] = useState('');
   const [resultDisplay, setResultDisplay] = useState<string>('');
   const [glowingNumbers, setGlowingNumbers] = useState<Set<number>>(new Set());
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const placeBet = (type: string, value: string | number) => {
     if (credits < betAmount) {
@@ -150,6 +151,46 @@ export default function Roulette() {
     setMessage('Bets cleared');
     setTimeout(() => setMessage(''), 2000);
   };
+
+  // Draw glow effect on canvas overlay
+  useEffect(() => {
+    if (!canvasRef.current || glowingNumbers.size === 0) return;
+
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw glow for each betting number
+    WHEEL_NUMBERS.forEach((num, idx) => {
+      if (!glowingNumbers.has(num)) return;
+
+      const angle = (idx * 360) / 37;
+      const rad = (angle * Math.PI) / 180;
+      const cx = canvas.width / 2 + 155 * Math.cos(rad - Math.PI / 2);
+      const cy = canvas.height / 2 + 155 * Math.sin(rad - Math.PI / 2);
+
+      // Cyan glow effect
+      const gradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, 20);
+      gradient.addColorStop(0, 'rgba(0, 255, 255, 0.8)');
+      gradient.addColorStop(0.7, 'rgba(0, 255, 255, 0.3)');
+      gradient.addColorStop(1, 'rgba(0, 255, 255, 0)');
+
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(cx, cy, 20, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Bright cyan outline
+      ctx.strokeStyle = 'rgba(0, 255, 255, 1)';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.arc(cx, cy, 12, 0, Math.PI * 2);
+      ctx.stroke();
+    });
+  }, [glowingNumbers]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-green-900 to-gray-900 p-4">
@@ -281,6 +322,15 @@ export default function Roulette() {
                   className="w-full h-full object-cover"
                 />
 
+                {/* Glow Overlay Canvas */}
+                <canvas
+                  ref={canvasRef}
+                  width={320}
+                  height={320}
+                  className="absolute inset-0 w-full h-full"
+                  style={{ pointerEvents: 'none' }}
+                />
+
                 {/* Spinning Ball Animation */}
                 <div
                   className="absolute w-6 h-6 bg-white rounded-full shadow-lg"
@@ -298,31 +348,6 @@ export default function Roulette() {
                 <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-4 z-10">
                   <div className="w-0 h-0 border-l-8 border-r-8 border-t-10 border-l-transparent border-r-transparent border-t-yellow-400 drop-shadow-lg"></div>
                 </div>
-
-                {/* Glow Overlay for Bet Numbers */}
-                <svg className="absolute inset-0 w-full h-full" style={{ pointerEvents: 'none' }}>
-                  {WHEEL_NUMBERS.map((num, idx) => {
-                    if (!glowingNumbers.has(num)) return null;
-                    const angle = (idx * 360) / 37;
-                    const rad = (angle * Math.PI) / 180;
-                    const cx = 50 + 40 * Math.cos(rad - Math.PI / 2);
-                    const cy = 50 + 40 * Math.sin(rad - Math.PI / 2);
-                    return (
-                      <circle
-                        key={num}
-                        cx={`${cx}%`}
-                        cy={`${cy}%`}
-                        r="8%"
-                        fill="none"
-                        stroke="rgba(0, 255, 255, 0.8)"
-                        strokeWidth="2"
-                        style={{
-                          filter: 'drop-shadow(0 0 8px rgba(0, 255, 255, 0.8))',
-                        }}
-                      />
-                    );
-                  })}
-                </svg>
               </div>
             </div>
 
