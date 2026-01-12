@@ -12,15 +12,18 @@ interface GameResult {
 
 export default function Plinko() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [credits, setCredits] = useState(3000000);
-  const [betAmount, setBetAmount] = useState(0.30);
+  const [credits, setCredits] = useState(1000000);
+  const [betAmount, setBetAmount] = useState(10000);
   const [pins, setPins] = useState(14);
   const [playing, setPlaying] = useState(false);
   const [gameHistory, setGameHistory] = useState<GameResult[]>([]);
   const [lastWin, setLastWin] = useState(0);
   const [selectedColor, setSelectedColor] = useState<'green' | 'yellow' | 'red'>('green');
+  const [autoplayCount, setAutoplayCount] = useState(10);
+  const [autoplayActive, setAutoplayActive] = useState(false);
+  const [autoplayRemaining, setAutoplayRemaining] = useState(0);
 
-  // Multipliers for 14-pin board
+  // Multipliers for different pin configurations
   const multipliers14 = [
     353, 49, 14, 5.3, 2.1, 0.5, 0.2, 0, 0.2, 0.5, 2.1, 5.3, 14, 49, 353
   ];
@@ -136,7 +139,7 @@ export default function Plinko() {
     });
   };
 
-  const simulateBall = () => {
+  const simulateBall = async () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -169,87 +172,98 @@ export default function Plinko() {
     let frame = 0;
     const totalFrames = 60;
 
-    const animate = () => {
-      drawBoard(canvas);
+    return new Promise<number>((resolve) => {
+      const animate = () => {
+        drawBoard(canvas);
 
-      // Draw ball at current position
-      const progress = frame / totalFrames;
-      let currentX = startX;
-      let currentY = startY - 30;
+        // Draw ball at current position
+        const progress = frame / totalFrames;
+        let currentX = startX;
+        let currentY = startY - 30;
 
-      if (progress < 1) {
-        const pathIndex = Math.floor(progress * (path.length / 2 - 1));
-        if (pathIndex < path.length / 2 - 1) {
-          currentX = path[pathIndex * 2];
-          currentY = path[pathIndex * 2 + 1];
+        if (progress < 1) {
+          const pathIndex = Math.floor(progress * (path.length / 2 - 1));
+          if (pathIndex < path.length / 2 - 1) {
+            currentX = path[pathIndex * 2];
+            currentY = path[pathIndex * 2 + 1];
+          }
+        } else {
+          currentX = startX - (rows - 1) * spacingX / 2 + finalSlot * spacingX;
+          currentY = canvas.height - 120;
         }
-      } else {
-        currentX = startX - (rows - 1) * spacingX / 2 + finalSlot * spacingX;
-        currentY = canvas.height - 120;
-      }
 
-      // Draw ball with gradient
-      const ballGradient = ctx.createRadialGradient(currentX - 3, currentY - 3, 0, currentX, currentY, 5);
-      ballGradient.addColorStop(0, '#ffffff');
-      ballGradient.addColorStop(1, '#00dddd');
-      ctx.fillStyle = ballGradient;
-      ctx.beginPath();
-      ctx.arc(currentX, currentY, 5, 0, Math.PI * 2);
-      ctx.fill();
+        // Draw ball with gradient
+        const ballGradient = ctx.createRadialGradient(currentX - 3, currentY - 3, 0, currentX, currentY, 5);
+        ballGradient.addColorStop(0, '#ffffff');
+        ballGradient.addColorStop(1, '#00dddd');
+        ctx.fillStyle = ballGradient;
+        ctx.beginPath();
+        ctx.arc(currentX, currentY, 5, 0, Math.PI * 2);
+        ctx.fill();
 
-      // Shadow
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
-      ctx.beginPath();
-      ctx.arc(currentX, currentY + 6, 4, 0, Math.PI * 2);
-      ctx.fill();
+        // Shadow
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+        ctx.beginPath();
+        ctx.arc(currentX, currentY + 6, 4, 0, Math.PI * 2);
+        ctx.fill();
 
-      frame++;
+        frame++;
 
-      if (frame <= totalFrames + 30) {
-        requestAnimationFrame(animate);
-      } else {
-        // Game complete
-        const multiplier = getMultipliers()[finalSlot];
-        const winnings = Math.floor(betAmount * multiplier * 100) / 100;
-        setLastWin(winnings);
-        setCredits(credits + winnings);
+        if (frame <= totalFrames + 30) {
+          requestAnimationFrame(animate);
+        } else {
+          // Game complete
+          const multiplier = getMultipliers()[finalSlot];
+          const winnings = Math.floor(betAmount * multiplier);
+          setLastWin(winnings);
+          setCredits(prev => prev + winnings);
 
-        const result: GameResult = {
-          multiplier,
-          bet: betAmount,
-          winnings,
-          timestamp: new Date().toLocaleTimeString()
-        };
+          const result: GameResult = {
+            multiplier,
+            bet: betAmount,
+            winnings,
+            timestamp: new Date().toLocaleTimeString()
+          };
 
-        setGameHistory([result, ...gameHistory.slice(0, 9)]);
-        setPlaying(false);
-      }
-    };
+          setGameHistory([result, ...gameHistory.slice(0, 9)]);
+          resolve(winnings);
+        }
+      };
 
-    animate();
+      animate();
+    });
   };
 
-  const handleDrop = () => {
+  const handleDrop = async () => {
     if (credits < betAmount || playing) return;
     setPlaying(true);
     setCredits(credits - betAmount);
-    simulateBall();
+    await simulateBall();
+    setPlaying(false);
   };
 
-  const handleAutoplay = () => {
-    if (credits < betAmount * 10 || playing) return;
+  const handleAutoplay = async () => {
+    if (credits < betAmount * autoplayCount || playing) return;
+    
+    setAutoplayActive(true);
+    setAutoplayRemaining(autoplayCount);
     setPlaying(true);
-    let drops = 0;
 
-    const dropInterval = setInterval(() => {
-      if (drops >= 10) {
-        clearInterval(dropInterval);
-        return;
+    for (let i = 0; i < autoplayCount; i++) {
+      if (credits < betAmount) {
+        setAutoplayActive(false);
+        setPlaying(false);
+        break;
       }
-      drops++;
+
       setCredits(prev => prev - betAmount);
-      simulateBall();
-    }, 2000);
+      setAutoplayRemaining(autoplayCount - i - 1);
+      await simulateBall();
+      await new Promise(resolve => setTimeout(resolve, 500));
+    }
+
+    setAutoplayActive(false);
+    setPlaying(false);
   };
 
   useEffect(() => {
@@ -281,7 +295,7 @@ export default function Plinko() {
           {/* Right: Credits and menu */}
           <div className="flex items-center gap-4">
             <div className="text-white font-bold text-lg">
-              {(credits / 1000000).toFixed(2)} EUR
+              {(credits / 1000).toFixed(0)}K
             </div>
             <button className="bg-teal-700 hover:bg-teal-800 text-white p-2 rounded-full border-2 border-teal-500">
               <Menu size={20} />
@@ -311,16 +325,16 @@ export default function Plinko() {
           {/* Controls */}
           <div className="bg-teal-800 rounded-lg p-6 border-2 border-teal-600">
             {/* Bet Control */}
-            <div className="flex items-center justify-center gap-6 mb-6">
+            <div className="flex items-center justify-center gap-6 mb-6 flex-wrap">
               <div className="text-center">
-                <div className="text-white text-sm mb-2">Bet EUR</div>
+                <div className="text-white text-sm mb-2">Bet Amount</div>
                 <div className="bg-teal-700 border-2 border-teal-500 rounded-lg px-6 py-3 text-white font-bold text-lg min-w-[150px]">
-                  {betAmount.toFixed(2)}
+                  {(betAmount / 1000).toFixed(0)}K
                 </div>
               </div>
 
               <button
-                onClick={() => setBetAmount(Math.max(0.01, betAmount - 0.10))}
+                onClick={() => setBetAmount(Math.max(1000, betAmount - 5000))}
                 className="bg-teal-600 hover:bg-teal-700 text-white w-12 h-12 rounded-full font-bold border-2 border-teal-500 text-xl"
               >
                 −
@@ -331,7 +345,7 @@ export default function Plinko() {
               </button>
 
               <button
-                onClick={() => setBetAmount(betAmount + 0.10)}
+                onClick={() => setBetAmount(betAmount + 5000)}
                 className="bg-teal-600 hover:bg-teal-700 text-white w-12 h-12 rounded-full font-bold border-2 border-teal-500 text-xl"
               >
                 +
@@ -358,8 +372,8 @@ export default function Plinko() {
               </button>
             </div>
 
-            {/* Pin Selection */}
-            <div className="flex justify-center gap-4">
+            {/* Pin Selection and Autoplay */}
+            <div className="flex justify-center gap-4 flex-wrap">
               {[8, 12, 14].map(p => (
                 <button
                   key={p}
@@ -373,6 +387,25 @@ export default function Plinko() {
                   {p} Pins
                 </button>
               ))}
+
+              {/* Autoplay Controls */}
+              <div className="flex items-center gap-2 ml-4">
+                <input
+                  type="number"
+                  min="1"
+                  max="100"
+                  value={autoplayCount}
+                  onChange={(e) => setAutoplayCount(Math.max(1, parseInt(e.target.value) || 1))}
+                  className="bg-teal-700 text-white border-2 border-teal-500 rounded px-3 py-2 w-16 font-bold"
+                />
+                <button
+                  onClick={handleAutoplay}
+                  disabled={playing || credits < betAmount * autoplayCount}
+                  className="bg-purple-500 hover:bg-purple-600 disabled:bg-gray-500 text-white px-6 py-2 rounded-full font-bold border-2 border-purple-400"
+                >
+                  {autoplayActive ? `Autoplay (${autoplayRemaining})` : 'Autoplay'}
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -387,7 +420,7 @@ export default function Plinko() {
               {gameHistory.slice(0, 5).map((result, idx) => (
                 <div key={idx} className="bg-teal-700 rounded p-3 text-center border border-teal-600">
                   <div className="text-white font-bold">{result.multiplier.toFixed(2)}x</div>
-                  <div className="text-teal-200 text-sm">+{result.winnings.toFixed(2)}</div>
+                  <div className="text-teal-200 text-sm">+{(result.winnings / 1000).toFixed(0)}K</div>
                 </div>
               ))}
             </div>
@@ -401,15 +434,15 @@ export default function Plinko() {
         <div className="grid grid-cols-3 gap-6">
           <div>
             <h3 className="text-orange-400 font-bold mb-2">1️⃣ PLACE YOUR BET</h3>
-            <p className="text-teal-200 text-sm">Select your bet amount using the +/- buttons. Choose between 8, 12, or 14 pins for different difficulty levels.</p>
+            <p className="text-teal-200 text-sm">Select your bet amount using the +/- buttons. Choose between 8, 12, or 14 pins for different difficulty levels. More pins = higher volatility!</p>
           </div>
           <div>
             <h3 className="text-orange-400 font-bold mb-2">2️⃣ DROP THE BALL</h3>
-            <p className="text-teal-200 text-sm">Click the spin button to drop the ball. Watch it bounce off the white pegs as it falls down the pyramid randomly.</p>
+            <p className="text-teal-200 text-sm">Click the spin button to drop the ball. Watch it bounce off the white pegs as it falls down the pyramid. The path is completely random!</p>
           </div>
           <div>
             <h3 className="text-orange-400 font-bold mb-2">3️⃣ WIN & COLLECT</h3>
-            <p className="text-teal-200 text-sm">The ball lands in a multiplier slot at the bottom. Your winnings = Bet × Multiplier. Collect instantly!</p>
+            <p className="text-teal-200 text-sm">The ball lands in a multiplier slot at the bottom. Your winnings = Bet × Multiplier. Use Autoplay for automatic consecutive drops!</p>
           </div>
         </div>
       </div>
