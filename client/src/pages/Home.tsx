@@ -59,20 +59,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Welcome Bonus Section */}
+      {/* Start Playing Section */}
       <section className="py-20 bg-gradient-to-b from-background to-muted">
         <div className="container mx-auto px-4">
           <div className="bg-gradient-to-r from-secondary to-accent rounded-2xl p-8 md:p-12 text-center text-white shadow-2xl">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              🎁 Claim Your Welcome Bonus
+              🎮 Start Playing Now
             </h2>
             <p className="text-xl mb-8 text-gray-100">
-              Get 1,000,000 FREE COINS when you sign up today!
+              Get 1,000,000 FREE COINS to play all our amazing games!
             </p>
             <Link href="/play-now">
               <a className="no-underline">
                 <Button className="bg-white text-secondary hover:bg-gray-100 font-bold px-8 py-3 text-lg">
-                  CLAIM NOW
+                  PLAY NOW
                 </Button>
               </a>
             </Link>

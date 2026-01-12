@@ -5,46 +5,41 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
-import About from "./pages/About";
 import PlayNow from "./pages/PlayNow";
-import Contact from "./pages/Contact";
-import Community from "./pages/Community";
-import Legal from "./pages/Legal";
-import Privacy from "./pages/Privacy";
-import Terms from "./pages/Terms";
-import Disclaimer from "./pages/Disclaimer";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import About from "./pages/About";
+import GamesHub from "./pages/GamesHub";
+import Mines from "./pages/games/Mines";
+import Slots from "./pages/games/Slots";
+import Plinko from "./pages/games/Plinko";
+import Diamonds from "./pages/games/Diamonds";
+import DreamCatcher from "./pages/games/DreamCatcher";
 
 function Router() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <Header />
-      <main className="flex-1">
-        <Switch>
-          <Route path={"/"} component={Home} />
-          <Route path={"/play-now"} component={PlayNow} />
-          <Route path={"/about"} component={About} />
-          <Route path={"/contact"} component={Contact} />
-          <Route path={"/community"} component={Community} />
-          <Route path={"/legal"} component={Legal} />
-          <Route path={"/privacy"} component={Privacy} />
-          <Route path={"/terms"} component={Terms} />
-          <Route path={"/disclaimer"} component={Disclaimer} />
-          <Route path={"/404"} component={NotFound} />
-          {/* Final fallback route */}
-          <Route component={NotFound} />
-        </Switch>
-      </main>
-      <Footer />
-    </div>
+    <Switch>
+      <Route path={"/"} component={Home} />
+      <Route path={"/play-now"} component={PlayNow} />
+      <Route path={"/about"} component={About} />
+      <Route path={"/games"} component={GamesHub} />
+      <Route path={"/game/mines"} component={Mines} />
+      <Route path={"/game/slots"} component={Slots} />
+      <Route path={"/game/plinko"} component={Plinko} />
+      <Route path={"/game/diamonds"} component={Diamonds} />
+      <Route path={"/game/dreamcatcher"} component={DreamCatcher} />
+      <Route path={"/404"} component={NotFound} />
+      {/* Final fallback route */}
+      <Route component={NotFound} />
+    </Switch>
   );
 }
 
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="dark">
+      <ThemeProvider
+        defaultTheme="light"
+        // switchable
+      >
         <TooltipProvider>
           <Toaster />
           <Router />

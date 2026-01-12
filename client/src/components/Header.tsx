@@ -26,6 +26,11 @@ export default function Header() {
                 Home
               </a>
             </Link>
+            <Link href="/games">
+              <a className="text-white hover:text-accent transition-colors font-medium">
+                Games
+              </a>
+            </Link>
             <Link href="/play-now">
               <a className="text-white hover:text-accent transition-colors font-medium">
                 Play Now
@@ -36,20 +41,10 @@ export default function Header() {
                 About
               </a>
             </Link>
-            <Link href="/contact">
-              <a className="text-white hover:text-accent transition-colors font-medium">
-                Contact
-              </a>
-            </Link>
-            <Link href="/community">
-              <a className="text-white hover:text-accent transition-colors font-medium">
-                Community
-              </a>
-            </Link>
           </nav>
 
           {/* CTA Button */}
-          <Link href="/play-now">
+          <Link href="/games">
             <a className="hidden md:inline-block no-underline">
               <Button className="bg-accent text-primary hover:bg-accent/90 font-bold px-6 py-2 text-lg">
                 PLAY NOW
@@ -77,6 +72,14 @@ export default function Header() {
                 Home
               </a>
             </Link>
+            <Link href="/games">
+              <a
+                className="text-white hover:text-accent transition-colors font-medium"
+                onClick={() => setIsOpen(false)}
+              >
+                Games
+              </a>
+            </Link>
             <Link href="/play-now">
               <a
                 className="text-white hover:text-accent transition-colors font-medium"
@@ -93,23 +96,7 @@ export default function Header() {
                 About
               </a>
             </Link>
-            <Link href="/contact">
-              <a
-                className="text-white hover:text-accent transition-colors font-medium"
-                onClick={() => setIsOpen(false)}
-              >
-                Contact
-              </a>
-            </Link>
-            <Link href="/community">
-              <a
-                className="text-white hover:text-accent transition-colors font-medium"
-                onClick={() => setIsOpen(false)}
-              >
-                Community
-              </a>
-            </Link>
-            <Link href="/play-now">
+            <Link href="/games">
               <a className="no-underline" onClick={() => setIsOpen(false)}>
                 <Button className="w-full bg-accent text-primary hover:bg-accent/90 font-bold py-2 text-lg">
                   PLAY NOW

@@ -13,18 +13,18 @@ export default function PlayNow() {
         </div>
       </section>
 
-      {/* Welcome Bonus */}
+      {/* Start with Free Coins */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="bg-gradient-to-r from-secondary to-accent rounded-2xl p-12 text-center text-white shadow-2xl mb-16">
-            <h2 className="text-4xl font-bold mb-4">Welcome Bonus</h2>
-            <p className="text-2xl mb-8">Claim 1,000,000 FREE COINS</p>
+            <h2 className="text-4xl font-bold mb-4">Play for Free</h2>
+            <p className="text-2xl mb-8">Start with 1,000,000 FREE COINS</p>
             <p className="text-lg mb-8 text-gray-100">
               No deposit required. No credit card needed. Just pure gaming fun!
             </p>
-            <Button className="bg-white text-secondary hover:bg-gray-100 font-bold px-12 py-4 text-xl">
-              CLAIM BONUS NOW
-            </Button>
+            <p className="text-sm text-gray-200">
+              Your coins reset when you run out - play as much as you want!
+            </p>
           </div>
         </div>
       </section>
@@ -132,25 +132,25 @@ export default function PlayNow() {
         </div>
       </section>
 
-      {/* Daily Rewards */}
+      {/* Game Features */}
       <section className="py-20 bg-gradient-to-r from-primary via-purple-900 to-secondary text-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12">Daily Rewards & Bonuses</h2>
+          <h2 className="text-4xl font-bold text-center mb-12">Why Our Games Rock</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-white/10 rounded-xl p-8 backdrop-blur text-center">
-              <div className="text-5xl mb-4">🎁</div>
-              <h3 className="text-2xl font-bold mb-4">Daily Login</h3>
-              <p>Collect free coins every day you play</p>
+              <div className="text-5xl mb-4">🎮</div>
+              <h3 className="text-2xl font-bold mb-4">Easy to Play</h3>
+              <p>Simple mechanics with big winning potential</p>
             </div>
             <div className="bg-white/10 rounded-xl p-8 backdrop-blur text-center">
-              <div className="text-5xl mb-4">⭐</div>
-              <h3 className="text-2xl font-bold mb-4">Level Up Rewards</h3>
-              <p>Unlock bigger bonuses as you progress</p>
+              <div className="text-5xl mb-4">⚡</div>
+              <h3 className="text-2xl font-bold mb-4">Fast Action</h3>
+              <p>Quick rounds keep the excitement going</p>
             </div>
             <div className="bg-white/10 rounded-xl p-8 backdrop-blur text-center">
-              <div className="text-5xl mb-4">🏆</div>
-              <h3 className="text-2xl font-bold mb-4">Tournaments</h3>
-              <p>Compete and win amazing prizes</p>
+              <div className="text-5xl mb-4">🎰</div>
+              <h3 className="text-2xl font-bold mb-4">5 Unique Games</h3>
+              <p>Variety of gameplay styles to enjoy</p>
             </div>
           </div>
         </div>
