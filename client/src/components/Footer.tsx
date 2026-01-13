@@ -89,6 +89,25 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Operator Company */}
+          <div>
+            <h4 className="font-bold text-lg mb-4 text-accent">COMPANY</h4>
+            <div className="space-y-3 text-sm">
+              <div>
+                <p className="text-gray-300">Operated by:</p>
+                <p className="font-semibold">CC INNOVATIONS (OPC) PRIVATE LIMITED</p>
+              </div>
+              <div>
+                <p className="text-gray-300">CIN:</p>
+                <p className="font-semibold">U78100JH2023OPC021360</p>
+              </div>
+              <div>
+                <p className="text-gray-300">GST:</p>
+                <p className="font-semibold">20AALCC3673P1ZB</p>
+              </div>
+            </div>
+          </div>
+
           {/* Social Media */}
           <div style={{display: 'none'}}>
             <h4 className="font-bold text-lg mb-4">Follow Us</h4>
