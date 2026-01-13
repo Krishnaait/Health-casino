@@ -32,7 +32,7 @@ export default function About() {
             </div>
             <div>
               <img
-                src="/images/lucky-mascot-character.png"
+                src="/images/lucky-mascot-character.webp"
                 alt="Health Mitan Character"
                 className="rounded-xl shadow-2xl max-w-full h-auto"
               />
@@ -145,7 +145,7 @@ export default function About() {
             </div>
             <div>
               <img
-                src="/images/health-mitan-logo.png"
+                src="/images/health-mitan-logo.webp"
                 alt="Health Mitan Logo"
                 className="rounded-xl shadow-2xl max-w-full h-auto"
               />

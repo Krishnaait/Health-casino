@@ -9,7 +9,7 @@ export default function Home() {
       name: "Mines",
       description: "Click tiles to find safe spots and avoid mines. Increase your multiplier with each safe reveal!",
       maxMultiplier: "Up to 3x",
-      icon: "/images/mines-icon.png",
+      icon: "/images/mines-icon.webp",
       href: "/game/mines",
     },
     {
@@ -17,7 +17,7 @@ export default function Home() {
       name: "Slots",
       description: "Match 3 symbols on the reels to win! The Crown is worth 20x your bet!",
       maxMultiplier: "Up to 20x",
-      icon: "/images/slots-icon.png",
+      icon: "/images/slots-icon.webp",
       href: "/game/slots",
     },
     {
@@ -25,7 +25,7 @@ export default function Home() {
       name: "Plinko",
       description: "Drop the ball and watch it fall through pegs. Land in the center for the biggest multiplier!",
       maxMultiplier: "Up to 10x",
-      icon: "/images/plinko-icon.png",
+      icon: "/images/plinko-icon.webp",
       href: "/game/plinko",
     },
     {
@@ -33,7 +33,7 @@ export default function Home() {
       name: "Diamonds",
       description: "Match 3 or more gems of the same type to score big! The more you match, the bigger your reward!",
       maxMultiplier: "Up to 5x per match",
-      icon: "/images/diamonds-icon.png",
+      icon: "/images/diamonds-icon.webp",
       href: "/game/diamonds",
     },
     {
@@ -41,7 +41,7 @@ export default function Home() {
       name: "Roulette",
       description: "Spin the wheel and bet on numbers, colors, or ranges. Multiple betting options for every strategy!",
       maxMultiplier: "Up to 36x",
-      icon: "/images/roulette-icon.png",
+      icon: "/images/roulette-icon.webp",
       href: "/game/roulette",
     },
   ];
@@ -54,7 +54,7 @@ export default function Home() {
         <div
           className="absolute inset-0 opacity-30"
           style={{
-            backgroundImage: "url('/images/hero-casino-night.jpg')",
+            backgroundImage: "url('/images/hero-casino-night.webp')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -94,7 +94,7 @@ export default function Home() {
           {/* Right - Character Image */}
           <div className="flex justify-center">
             <img
-              src="/images/lucky-mascot-character.png"
+              src="/images/lucky-mascot-character.webp"
               alt="Health Mitan Mascot"
               className="max-w-md w-full h-auto drop-shadow-2xl"
             />

@@ -19,7 +19,7 @@ export default function Community() {
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <img
-            src="/images/community-celebration.jpg"
+            src="/images/community-celebration.webp"
             alt="Community Celebration"
             className="rounded-xl shadow-2xl w-full h-auto max-h-96 object-cover"
           />

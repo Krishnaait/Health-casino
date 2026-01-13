@@ -12,7 +12,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <img src="/images/health-mitan-logo.png" alt="Health Mitan" className="h-8 w-8" />
+              <img src="/images/health-mitan-logo.webp" alt="Health Mitan" className="h-8 w-8" />
               <h3 className="text-xl font-bold">HEALTH MITAN</h3>
             </div>
             <p className="text-sm text-gray-200 mb-4">
@@ -94,16 +94,23 @@ export default function Footer() {
             <h4 className="font-bold text-lg mb-4 text-accent">COMPANY</h4>
             <div className="space-y-3 text-sm">
               <div>
-                <p className="text-gray-300">Operated by:</p>
-                <p className="font-semibold">CC INNOVATIONS (OPC) PRIVATE LIMITED</p>
+                <p className="text-gray-300">Legal Name:</p>
+                <p className="font-semibold">HEALTH MITAN PRIVATE LIMITED</p>
               </div>
               <div>
                 <p className="text-gray-300">CIN:</p>
-                <p className="font-semibold">U78100JH2023OPC021360</p>
+                <p className="font-semibold">U86909CT2023PTC014998</p>
+              </div>
+              <div>
+                <p className="text-gray-300">PAN:</p>
+                <p className="font-semibold">AWRPH8122K</p>
               </div>
               <div>
                 <p className="text-gray-300">GST:</p>
-                <p className="font-semibold">20AALCC3673P1ZB</p>
+                <p className="font-semibold">22AAGCH9149C1ZR</p>
+              </div>
+              <div>
+                <p className="text-gray-300 text-xs">Address: C/O Murit Lal Karsh, Vill Kot, Kasdol, Raipur-493335, Chhattisgarh, India</p>
               </div>
             </div>
           </div>

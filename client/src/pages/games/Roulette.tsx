@@ -263,7 +263,7 @@ export default function Roulette() {
             <div className="relative w-96 h-96 mb-6 shadow-2xl">
               <div className="relative w-full h-full rounded-full overflow-hidden">
                 <img
-                  src="/images/roulette-wheel.png"
+                  src="/images/roulette-wheel.webp"
                   alt="Roulette Wheel"
                   className="w-full h-full object-cover"
                 />
