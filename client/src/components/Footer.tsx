@@ -154,6 +154,17 @@ export default function Footer() {
         {/* Divider */}
         <div className="border-t border-white/20 my-8"></div>
 
+        {/* Disclaimer Section */}
+        <div className="bg-white/5 rounded-lg p-6 mb-8">
+          <h4 className="font-bold text-lg mb-3 text-accent">Age & Responsible Gaming Disclaimer</h4>
+          <p className="text-sm text-gray-200 leading-relaxed">
+            The content on this site is intended for users who are 18 years of age or older. It operates as a social gaming platform featuring free-to-play experiences available for entertainment and fun. This is a safe environment with no real money involved.
+          </p>
+          <p className="text-sm text-gray-200 leading-relaxed mt-3">
+            We are committed to responsible gaming practices. If you or someone you know needs help with gaming habits, please reach out to our support team at Support@pureplayfantasy.com or visit our Responsible Gaming page for resources and assistance.
+          </p>
+        </div>
+
         {/* Bottom Footer */}
         <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-200 space-y-4 md:space-y-0">
           <p>
