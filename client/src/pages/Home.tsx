@@ -138,10 +138,6 @@ export default function Home() {
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-accent text-xl mt-1">✓</span>
-                  <span className="text-muted-foreground">Daily rewards and bonuses</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-accent text-xl mt-1">✓</span>
                   <span className="text-muted-foreground">Entertainment and fun for all ages (18+)</span>
                 </li>
               </ul>
