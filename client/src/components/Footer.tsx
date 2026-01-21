@@ -165,6 +165,14 @@ export default function Footer() {
           </p>
         </div>
 
+        {/* Legal Independence Disclaimer */}
+        <div className="bg-yellow-900/20 border border-yellow-600/30 rounded-lg p-6 mb-8">
+          <h4 className="font-bold text-lg mb-3 text-yellow-300">Legal Disclaimer - Independence & Non-Affiliation</h4>
+          <p className="text-sm text-gray-200 leading-relaxed">
+            AQUASTRUCT is an independent gaming platform operated entirely by AQUASTRUCT CONSTRUCTION PRIVATE LIMITED. This business does not affiliate with, endorse, or have any partnership with any other brand, company, or organization unless explicitly stated on this website. All services, games, and content provided on this platform are solely the responsibility of AQUASTRUCT CONSTRUCTION PRIVATE LIMITED.
+          </p>
+        </div>
+
         {/* Bottom Footer */}
         <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-200 space-y-4 md:space-y-0">
           <p>
