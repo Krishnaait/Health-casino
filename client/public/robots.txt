@@ -1,4 +1,4 @@
-# AQUASTRUCT - robots.txt
+# CC INNOVATIONS - robots.txt
 # This file tells search engines which pages to crawl and which to avoid
 # Last Updated: January 2026
 

@@ -12,14 +12,14 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <img src="/images/aquastruct-logo.webp" alt="AQUASTRUCT" className="h-8 w-8" />
-              <h3 className="text-xl font-bold">AQUASTRUCT</h3>
+              <img src="/images/cc-innovations-logo.png" alt="CC INNOVATIONS" className="h-8 w-8" />
+              <h3 className="text-xl font-bold">CC INNOVATIONS</h3>
             </div>
             <p className="text-sm text-gray-200 mb-4">
               Experience the thrill of premium social casino gaming with our community of players worldwide.
             </p>
             <p className="text-xs text-gray-300">
-              <strong>AQUASTRUCT CONSTRUCTION PRIVATE LIMITED</strong><br />
+              <strong>CC INNOVATIONS (OPC) PRIVATE LIMITED</strong><br />
               CIN: U41001JK2023PTC014834<br />
               PAN: AAZCA0661R
             </p>
@@ -95,22 +95,22 @@ export default function Footer() {
             <div className="space-y-3 text-sm">
               <div>
                 <p className="text-gray-300">Legal Name:</p>
-                <p className="font-semibold">AQUASTRUCT CONSTRUCTION PRIVATE LIMITED</p>
+                <p className="font-semibold">CC INNOVATIONS (OPC) PRIVATE LIMITED</p>
               </div>
               <div>
                 <p className="text-gray-300">CIN:</p>
-                <p className="font-semibold">U41001JK2023PTC014834</p>
+                <p className="font-semibold">U78100JH2023OPC021360</p>
               </div>
               <div>
                 <p className="text-gray-300">PAN:</p>
-                <p className="font-semibold">AAZCA0661R</p>
+                <p className="font-semibold">AALCC3673P</p>
               </div>
               <div>
                 <p className="text-gray-300">Email:</p>
                 <p className="font-semibold">Support@pureplayfantasy.com</p>
               </div>
               <div>
-                <p className="text-gray-300 text-xs">Address: C/O Laxman Dass, Khandak, Panthal Katra, Panthal, Udhampur, Udhampur, Jammu and Kashmir 182320, India</p>
+                <p className="text-gray-300 text-xs">Address: C/O N K SHARMA SEC 9 TYPE, BT QR NO 463. HEC, Dhurwa, Ranchi, Ranchi, Jharkhand 834004, India</p>
               </div>
             </div>
           </div>
@@ -169,17 +169,17 @@ export default function Footer() {
         <div className="bg-yellow-900/20 border border-yellow-600/30 rounded-lg p-6 mb-8">
           <h4 className="font-bold text-lg mb-3 text-yellow-300">Legal Disclaimer - Independence & Non-Affiliation</h4>
           <p className="text-sm text-gray-200 leading-relaxed">
-            AQUASTRUCT is an independent gaming platform operated entirely by AQUASTRUCT CONSTRUCTION PRIVATE LIMITED. This business does not affiliate with, endorse, or have any partnership with any other brand, company, or organization unless explicitly stated on this website. All services, games, and content provided on this platform are solely the responsibility of AQUASTRUCT CONSTRUCTION PRIVATE LIMITED.
+            CC INNOVATIONS is an independent gaming platform operated entirely by CC INNOVATIONS (OPC) PRIVATE LIMITED. This business does not affiliate with, endorse, or have any partnership with any other brand, company, or organization unless explicitly stated on this website. All services, games, and content provided on this platform are solely the responsibility of CC INNOVATIONS (OPC) PRIVATE LIMITED.
           </p>
         </div>
 
         {/* Bottom Footer */}
         <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-200 space-y-4 md:space-y-0">
           <p>
-            &copy; {currentYear} AQUASTRUCT CONSTRUCTION PRIVATE LIMITED. All rights reserved. | For amusement purposes only. Must be 18+
+            &copy; {currentYear} CC INNOVATIONS (OPC) PRIVATE LIMITED. All rights reserved. | For amusement purposes only. Must be 18+
           </p>
           <p className="text-xs text-gray-300">
-            Operated by: AQUASTRUCT CONSTRUCTION PRIVATE LIMITED | Support@pureplayfantasy.com | Address: C/O Laxman Dass, Khandak, Panthal Katra, Panthal, Udhampur, Udhampur, Jammu and Kashmir 182320, India
+            Operated by: CC INNOVATIONS (OPC) PRIVATE LIMITED | Support@pureplayfantasy.com | Address: C/O N K SHARMA SEC 9 TYPE, BT QR NO 463. HEC, Dhurwa, Ranchi, Ranchi, Jharkhand 834004, India
           </p>
         </div>
       </div>

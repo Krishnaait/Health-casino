@@ -7,7 +7,7 @@ export default function About() {
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-primary via-purple-900 to-secondary py-20 text-white">
         <div className="container mx-auto px-4">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">About AQUASTRUCT</h1>
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">About CC INNOVATIONS</h1>
           <p className="text-xl text-gray-200 max-w-2xl">
             Discover the story behind a premium social casino gaming platform dedicated to entertainment and fun.
           </p>
@@ -21,13 +21,13 @@ export default function About() {
             <div>
               <h2 className="text-4xl font-bold mb-6 text-foreground">Our Story</h2>
               <p className="text-lg text-muted-foreground mb-4">
-                AQUASTRUCT was founded with a mission to create a safe, entertaining, and responsible gaming platform where players can enjoy premium social casino games completely free.
+                CC INNOVATIONS was founded with a mission to create a safe, entertaining, and responsible gaming platform where players can enjoy premium social casino games completely free.
               </p>
               <p className="text-lg text-muted-foreground mb-4">
                 We believe that entertainment should be accessible to all. Our platform combines engaging games with a focus on player safety and responsible gaming practices.
               </p>
               <p className="text-lg text-muted-foreground">
-                Today, AQUASTRUCT continues to innovate and deliver exceptional gaming experiences with a commitment to integrity, fairness, and community.
+                Today, CC INNOVATIONS continues to innovate and deliver exceptional gaming experiences with a commitment to integrity, fairness, and community.
               </p>
             </div>
             <div>
@@ -79,7 +79,7 @@ export default function About() {
       {/* Why Choose Us */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12 text-foreground">Why Choose AQUASTRUCT?</h2>
+          <h2 className="text-4xl font-bold text-center mb-12 text-foreground">Why Choose CC INNOVATIONS?</h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div className="flex gap-4">
               <div className="text-4xl text-secondary">🎮</div>
@@ -130,22 +130,22 @@ export default function About() {
           <h2 className="text-4xl font-bold text-center mb-12 text-card-foreground">About Our Company</h2>
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h3 className="text-2xl font-bold mb-4 text-card-foreground">AQUASTRUCT CONSTRUCTION PRIVATE LIMITED</h3>
+              <h3 className="text-2xl font-bold mb-4 text-card-foreground">CC INNOVATIONS (OPC) PRIVATE LIMITED</h3>
               <p className="text-muted-foreground mb-6">
-                AQUASTRUCT CONSTRUCTION PRIVATE LIMITED is a registered company committed to providing safe, entertaining, and responsible gaming experiences. We operate with transparency, integrity, and a focus on player satisfaction.
+                CC INNOVATIONS (OPC) PRIVATE LIMITED is a registered company committed to providing safe, entertaining, and responsible gaming experiences. We operate with transparency, integrity, and a focus on player satisfaction.
               </p>
               <div className="bg-background rounded-lg p-6 space-y-3">
-                <p className="text-muted-foreground"><strong>Legal Name:</strong> AQUASTRUCT CONSTRUCTION PRIVATE LIMITED</p>
-                <p className="text-muted-foreground"><strong>CIN:</strong> U41001JK2023PTC014834</p>
-                <p className="text-muted-foreground"><strong>PAN:</strong> AAZCA0661R</p>
+                <p className="text-muted-foreground"><strong>Legal Name:</strong> CC INNOVATIONS (OPC) PRIVATE LIMITED</p>
+                <p className="text-muted-foreground"><strong>CIN:</strong> U78100JH2023OPC021360</p>
+                <p className="text-muted-foreground"><strong>PAN:</strong> AALCC3673P</p>
                 <p className="text-muted-foreground"><strong>Email:</strong> Support@pureplayfantasy.com</p>
-                <p className="text-muted-foreground"><strong>Address:</strong> C/O Laxman Dass, Khandak, Panthal Katra, Panthal, Udhampur, Udhampur, Jammu and Kashmir 182320, India</p>
+                <p className="text-muted-foreground"><strong>Address:</strong> C/O N K SHARMA SEC 9 TYPE, BT QR NO 463. HEC, Dhurwa, Ranchi, Ranchi, Jharkhand 834004, India</p>
               </div>
             </div>
             <div>
               <img
-                src="/images/aquastruct-logo.webp"
-                alt="AQUASTRUCT Logo"
+                src="/images/cc-innovations-logo.png"
+                alt="CC INNOVATIONS Logo"
                 className="rounded-xl shadow-2xl max-w-full h-auto"
               />
             </div>
@@ -159,7 +159,7 @@ export default function About() {
           <h2 className="text-4xl font-bold text-center mb-12">Responsible Gaming Commitment</h2>
           <div className="max-w-3xl mx-auto">
             <p className="text-lg mb-6 text-gray-200">
-              At AQUASTRUCT, we are deeply committed to promoting responsible gaming. Our platform is designed for entertainment purposes only, with no real money involved.
+              At CC INNOVATIONS, we are deeply committed to promoting responsible gaming. Our platform is designed for entertainment purposes only, with no real money involved.
             </p>
             <div className="grid md:grid-cols-2 gap-8">
               <div className="bg-white/10 rounded-lg p-6">
@@ -192,7 +192,7 @@ export default function About() {
             Join Our Community Today
           </h2>
           <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Experience premium social casino gaming with AQUASTRUCT. Safe, entertaining, and completely free!
+            Experience premium social casino gaming with CC INNOVATIONS. Safe, entertaining, and completely free!
           </p>
           <Link href="/games">
             <a className="no-underline">

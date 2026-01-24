@@ -65,7 +65,7 @@ export default function Home() {
           {/* Left Content */}
           <div className="text-white">
             <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-              Welcome to <span className="text-accent">AQUASTRUCT</span>
+              Welcome to <span className="text-accent">CC INNOVATIONS</span>
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-gray-200">
               Experience premium social casino gaming. Play free, enjoy exciting games, and have fun with our community!
@@ -95,7 +95,7 @@ export default function Home() {
           <div className="flex justify-center">
             <img
               src="/images/lucky-mascot-character.webp"
-              alt="AQUASTRUCT Mascot"
+              alt="CC INNOVATIONS Mascot"
               className="max-w-md w-full h-auto drop-shadow-2xl"
             />
           </div>
@@ -209,7 +209,7 @@ export default function Home() {
               Why We're Here
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              AQUASTRUCT is dedicated to providing a safe, entertaining, and responsible gaming platform.
+              CC INNOVATIONS is dedicated to providing a safe, entertaining, and responsible gaming platform.
             </p>
           </div>
 

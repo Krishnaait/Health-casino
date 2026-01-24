@@ -12,9 +12,9 @@ export default function Header() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 no-underline">
-            <img src="/images/aquastruct-logo.webp" alt="AQUASTRUCT" className="h-16 w-16" />
+            <img src="/images/cc-innovations-logo.png" alt="CC INNOVATIONS" className="h-16 w-16" />
             <div className="text-xl font-bold text-white font-poppins">
-              AQUASTRUCT
+              CC INNOVATIONS
             </div>
           </Link>
 

@@ -88,16 +88,16 @@ export default function Contact() {
                 <h3 className="text-lg font-semibold text-card-foreground mb-4">Company Information</h3>
                 <div className="space-y-3 text-muted-foreground text-sm">
                   <p>
-                    <strong>AQUASTRUCT CONSTRUCTION PRIVATE LIMITED</strong><br />
-                    C/O Laxman Dass<br />
-                    Khandak, Panthal Katra<br />
-                    Panthal, Udhampur<br />
-                    Udhampur - 182320<br />
-                    Jammu and Kashmir, India
+                    <strong>CC INNOVATIONS (OPC) PRIVATE LIMITED</strong><br />
+                    C/O N K SHARMA SEC 9 TYPE<br />
+                    BT QR NO 463. HEC<br />
+                    Dhurwa, Ranchi<br />
+                    Ranchi, Jharkhand 834004<br />
+                    India
                   </p>
                   <p>
-                    <strong>CIN:</strong> U41001JK2023PTC014834<br />
-                    <strong>PAN:</strong> AAZCA0661R<br />
+                    <strong>CIN:</strong> U78100JH2023OPC021360<br />
+                    <strong>PAN:</strong> AALCC3673P<br />
                     <strong>Email:</strong> Support@pureplayfantasy.com
                   </p>
                 </div>
