@@ -21,13 +21,13 @@ export function PromoWidget({ onVisibilityChange }: PromoWidgetProps) {
         onVisibilityChange?.(shouldShow);
         if (shouldShow) {
           // Additional delay before showing to avoid instant detection
-          setTimeout(() => setLoaded(true), 800);
+          setTimeout(() => setLoaded(true), 100);
         }
       } catch {
         // Fail silently
         setShow(false);
       }
-    }, 1200); // 1.2s delay after page load
+    }, 200); // 0.2s delay after page load
 
     return () => clearTimeout(initDelay);
   }, [onVisibilityChange]);
